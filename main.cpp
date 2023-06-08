@@ -48,7 +48,7 @@ void addition()
     cout << "Enter the number of cols: ";
     cin >> col;
 
-    int value[row][col];
+    int matrix[row][col];
     int sum[row][col];
 
     for (int d = 0; d < row; d++)
@@ -56,14 +56,7 @@ void addition()
         for (int e = 0; e < col; e++)
         {
             sum[d][e] = 0;
-        }
-    }
-
-    for (int f = 0; f < row; f++)
-    {
-        for (int g = 0; g < row; g++)
-        {
-            value[f][g] = 0;
+            matrix[d][e] = 0;
         }
     }
 
@@ -74,23 +67,25 @@ void addition()
             for (int a = 0; a < col; a++)
             {
                 cout << "Enter the value in row " << (j + 1) << " and column " << (a + 1) << " : ";
-                cin >> value[j][a];
-                sum[j][a] += value[j][a];
+                cin >> matrix[j][a];
+                sum[j][a] += matrix[j][a];
             }
         }
 
-        cout << endl << "Please enter the values for the next matrix" << endl << endl;
+        cout << endl
+             << "Please enter the values for the next matrix" << endl
+             << endl;
     }
 
-     cout << "Your product would be: " << endl;
-            for (int b = 0; b < row; b++)
-            {
-                for (int c = 0; c < col; c++)
-                {
-                    cout << sum[b][c] << " ";
-                }
-                cout << endl;
-            }
+    cout << "Your product would be: " << endl;
+    for (int b = 0; b < row; b++)
+    {
+        for (int c = 0; c < col; c++)
+        {
+            cout << sum[b][c] << " ";
+        }
+        cout << endl;
+    }
 }
 
 void multiplication()
@@ -166,53 +161,57 @@ void multiplication()
 
 void transpose()
 {
-    int a[10][10], transpose[10][10], row, column, i, j;
+    int row, col;
 
-    cout << "Enter rows and columns of matrix: ";
-    cin >> row >> column;
+    cout << "Please enter the dimensions for matrices " << endl;
+    cout << "Enter the number of rows: ";
+    cin >> row;
+    cout << "Enter the number of cols: ";
+    cin >> col;
 
-    cout << "\nEnter elements of matrix: " << endl;
+    int matrix[row][col];
+    int transpose[row][col];
 
-    // Storing matrix elements
-    for (int i = 0; i < row; ++i)
+    for (int i = 0; i < row; i++)
     {
-        for (int j = 0; j < column; ++j)
+        for (int j = 0; j < col; j++)
         {
-            cout << "Enter element a" << i + 1 << j + 1 << ": ";
-            cin >> a[i][j];
+            transpose[j][i] = 0;
+            matrix[i][j] = 0;
         }
     }
 
-    // Printing the a matrix
-    cout << "\nEntered Matrix: " << endl;
-    for (int i = 0; i < row; ++i)
+    for (int i = 0; i < row; i++)
     {
-        for (int j = 0; j < column; ++j)
+        for (int j = 0; j < col; j++)
         {
-            cout << " " << a[i][j];
-            if (j == column - 1)
-                cout << endl
-                     << endl;
+            cout << "Enter the value in row " << (i + 1) << " and column " << (j + 1) << " : ";
+            cin >> matrix[i][j];
+            transpose[j][i] = matrix[i][j];
         }
+        cout << endl;
     }
 
-    // Computing transpose of the matrix
-    for (int i = 0; i < row; ++i)
-        for (int j = 0; j < column; ++j)
+cout << "The transpose of: " << endl;
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < col; j++)
         {
-            transpose[j][i] = a[i][j];
+            cout << matrix[i][j];
         }
+        cout << endl;
+    }
 
-    // Printing the transpose
-    cout << "\nTranspose of Matrix: " << endl;
-    for (int i = 0; i < column; ++i)
-        for (int j = 0; j < row; ++j)
+    cout << endl << "is : " << endl;
+
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < col; j++)
         {
-            cout << " " << transpose[i][j];
-            if (j == row - 1)
-                cout << endl
-                     << endl;
+            cout << transpose[i][j];
         }
+        cout << endl;
+    }
 
     return;
 }
