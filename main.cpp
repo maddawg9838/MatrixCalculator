@@ -77,7 +77,8 @@ void addition()
              << endl;
     }
 
-    cout << "Your product would be: " << endl;
+    cout << "Your final sum: " << endl;
+
     for (int b = 0; b < row; b++)
     {
         for (int c = 0; c < col; c++)
@@ -90,71 +91,112 @@ void addition()
 
 void multiplication()
 {
-    int a[10][10], b[10][10], mult[10][10], r1, c1, r2, c2, i, j, k;
+    int row1, col1, row2, col2;
 
     cout << "Enter rows and columns for first matrix: ";
-    cin >> r1 >> c1;
+    cin >> row1 >> col1;
     cout << "Enter rows and columns for second matrix: ";
-    cin >> r2 >> c2;
+    cin >> row2 >> col2;
 
-    // If column of first matrix in not equal to row of second matrix,
-    // ask the user to enter the size of matrix again.
-    while (c1 != r2)
+    if (col1 != row2)
     {
-        cout << "Error! column of first matrix not equal to row of second.";
-
-        cout << "Enter rows and columns for first matrix: ";
-        cin >> r1 >> c1;
-
-        cout << "Enter rows and columns for second matrix: ";
-        cin >> r2 >> c2;
+        cout << "Error! The column of first matrix is not equal to row of second matrix, thus they cannot be multiplied together" << endl;
     }
 
-    // Storing elements of first matrix.
-    cout << endl
-         << "Enter elements of matrix 1:" << endl;
-    for (i = 0; i < r1; ++i)
-        for (j = 0; j < c1; ++j)
-        {
-            cout << "Enter element a" << i + 1 << j + 1 << " : ";
-            cin >> a[i][j];
-        }
+    int matrix1[row1][col1], matrix2[row2][col2], product[row1][col2];
 
-    // Storing elements of second matrix.
+    for (int i = 0; i < row1; i++)
+    {
+        for (int j = 0; j < col1; j++)
+        {
+            matrix1[i][j] = 0;
+        }
+    }
+
+        for (int i = 0; i < row2; i++)
+    {
+        for (int j = 0; j < col2; j++)
+        {
+            matrix2[i][j] = 0;
+        }
+    }
+
+    cout << endl
+         << "Enter elements of matrix 1: " << endl;
+    for (int i = 0; i < row1; i++)
+    {
+        for (int j = 0; j < col1; j++)
+        {
+            cout << "Enter the value in row " << (i + 1) << " and column " << (j + 1) << " : ";
+            cin >> matrix1[i][j];
+        }
+        cout << endl;
+    }
+
     cout << endl
          << "Enter elements of matrix 2:" << endl;
-    for (i = 0; i < r2; ++i)
-        for (j = 0; j < c2; ++j)
+    for (int a = 0; a < row2; a++)
+    {
+        for (int b = 0; b < col2; b++)
         {
-            cout << "Enter element b" << i + 1 << j + 1 << " : ";
-            cin >> b[i][j];
+            cout << "Enter the value in row " << (a + 1) << " and column " << (b + 1) << " : ";
+            cin >> matrix2[a][b];
         }
+        cout << endl;
+    }
 
-    // Initializing elements of matrix mult to 0.
-    for (i = 0; i < r1; ++i)
-        for (j = 0; j < c2; ++j)
+    for (int c = 0; c < row1; c++)
+    {
+        for (int d = 0; d < col2; d++)
         {
-            mult[i][j] = 0;
+            product[c][d] = 0;
         }
+        cout << endl;
+    }
 
-    // Multiplying matrix a and b and storing in array mult.
-    for (i = 0; i < r1; ++i)
-        for (j = 0; j < c2; ++j)
-            for (k = 0; k < c1; ++k)
+    for (int e = 0; e < row1; e++)
+    {
+        for (int f = 0; f < col2; f++)
+        {
+            for (int g = 0; g < col1; g++)
             {
-                mult[i][j] += a[i][k] * b[k][j];
+                product[e][f] += matrix1[e][g] * matrix2[g][f];
             }
-
-    // Displaying the multiplication of two matrix.
-    cout << endl
-         << "Output Matrix: " << endl;
-    for (i = 0; i < r1; ++i)
-        for (j = 0; j < c2; ++j)
-        {
-            cout << " " << mult[i][j];
-            if (j == c2 - 1)
-                cout << endl;
         }
+    }
+
+    cout << endl
+         << "Output Matrix from multiplying matrix 1: " << endl;
+    for (int h = 0; h < row1; h++)
+    {
+        for (int i = 0; i < col1; i++)
+        {
+            cout << " " << matrix1[h][i];
+        }
+        cout << endl;
+    }
+
+    cout << endl
+         << "to matrix 2: " << endl;
+    for (int j = 0; j < row2; j++)
+    {
+        for (int k = 0; k < col2; k++)
+        {
+            cout << " " << matrix2[j][k];
+        }
+        cout << endl;
+    }
+
+    cout << endl
+         << "results in this: " << endl;
+    for (int l = 0; l < row1; l++)
+    {
+        for (int m = 0; m < col2; m++)
+        {
+            cout << " " << product[l][m];
+        }
+        cout << endl;
+    }
 
     return;
 }
@@ -192,7 +234,7 @@ void transpose()
         cout << endl;
     }
 
-cout << "The transpose of: " << endl;
+    cout << "The transpose of: " << endl;
     for (int i = 0; i < row; i++)
     {
         for (int j = 0; j < col; j++)
@@ -202,7 +244,8 @@ cout << "The transpose of: " << endl;
         cout << endl;
     }
 
-    cout << endl << "is : " << endl;
+    cout << endl
+         << "is : " << endl;
 
     for (int i = 0; i < row; i++)
     {
