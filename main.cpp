@@ -10,59 +10,87 @@ void transpose();
 
 int main()
 {
-  do
-  {
-  cout << "1. Addition" << endl
-    << "2. Multiplication" << endl
-    << "3. Transpose" << endl;
-  } while (redo() == true);
+    int option;
+
+    do
+    {
+        cout << "1. Addition" << endl
+             << "2. Multiplication" << endl
+             << "3. Transpose" << endl;
+
+        cin >> option;
+
+        if (option == 1)
+        {
+            addition();
+        }
+        else if (option == 2)
+        {
+            multiplication();
+        }
+        else if (option == 3)
+        {
+            transpose();
+        }
+    } while (redo() == true);
 }
 
 void addition()
 {
-    int r, c, a[100][100], b[100][100], sum[100][100], i, j;
+    int number, row, col;
 
-    cout << "Enter number of rows (between 1 and 100): ";
-    cin >> r;
+    cout << "How many matrices are being added together? ";
+    cin >> number;
 
-    cout << "Enter number of columns (between 1 and 100): ";
-    cin >> c;
+    cout << "Please enter the dimensions for matrices " << endl;
+    cout << "Enter the number of rows: ";
+    cin >> row;
+    cout << "Enter the number of cols: ";
+    cin >> col;
 
-    cout << endl << "Enter elements of 1st matrix: " << endl;
+    int value[row][col];
+    int sum[row][col];
 
-    // Storing elements of first matrix entered by user.
-    for(i = 0; i < r; ++i)
-       for(j = 0; j < c; ++j)
-       {
-           cout << "Enter element a" << i + 1 << j + 1 << " : ";
-           cin >> a[i][j];
-       }
-
-    // Storing elements of second matrix entered by user.
-    cout << endl << "Enter elements of 2nd matrix: " << endl;
-    for(i = 0; i < r; ++i)
-       for(j = 0; j < c; ++j)
-       {
-           cout << "Enter element b" << i + 1 << j + 1 << " : ";
-           cin >> b[i][j];
-       }
-
-    // Adding Two matrices
-    for(i = 0; i < r; ++i)
-        for(j = 0; j < c; ++j)
-            sum[i][j] = a[i][j] + b[i][j];
-
-    // Displaying the resultant sum matrix.
-    cout << endl << "Sum of two matrix is: " << endl;
-    for(i = 0; i < r; ++i)
-        for(j = 0; j < c; ++j)
+    for (int d = 0; d < row; d++)
+    {
+        for (int e = 0; e < col; e++)
         {
-            cout << sum[i][j] << "  ";
-            if(j == c - 1)
-                cout << endl;
+            sum[d][e] = 0;
+        }
+    }
+
+    for (int f = 0; f < row; f++)
+    {
+        for (int g = 0; g < row; g++)
+        {
+            value[f][g] = 0;
+        }
+    }
+
+    for (int i = 0; i < number; i++)
+    {
+        for (int j = 0; j < row; j++)
+        {
+            for (int a = 0; a < col; a++)
+            {
+                cout << "Enter the value in row " << (j + 1) << " and column " << (a + 1) << " : ";
+                cin >> value[j][a];
+                sum[j][a] += value[j][a];
+            }
         }
 
-    return;
+        cout << endl << "Please enter the values for the next matrix" << endl << endl;
+    }
+
+     cout << "Your product would be: " << endl;
+            for (int b = 0; b < row; b++)
+            {
+                for (int c = 0; c < col; c++)
+                {
+                    cout << sum[b][c] << " ";
+                }
+                cout << endl;
+            }
 }
 
 void multiplication()
@@ -76,7 +104,7 @@ void multiplication()
 
     // If column of first matrix in not equal to row of second matrix,
     // ask the user to enter the size of matrix again.
-    while (c1!=r2)
+    while (c1 != r2)
     {
         cout << "Error! column of first matrix not equal to row of second.";
 
@@ -88,111 +116,117 @@ void multiplication()
     }
 
     // Storing elements of first matrix.
-    cout << endl << "Enter elements of matrix 1:" << endl;
-    for(i = 0; i < r1; ++i)
-        for(j = 0; j < c1; ++j)
+    cout << endl
+         << "Enter elements of matrix 1:" << endl;
+    for (i = 0; i < r1; ++i)
+        for (j = 0; j < c1; ++j)
         {
             cout << "Enter element a" << i + 1 << j + 1 << " : ";
             cin >> a[i][j];
         }
 
     // Storing elements of second matrix.
-    cout << endl << "Enter elements of matrix 2:" << endl;
-    for(i = 0; i < r2; ++i)
-        for(j = 0; j < c2; ++j)
+    cout << endl
+         << "Enter elements of matrix 2:" << endl;
+    for (i = 0; i < r2; ++i)
+        for (j = 0; j < c2; ++j)
         {
             cout << "Enter element b" << i + 1 << j + 1 << " : ";
             cin >> b[i][j];
         }
 
     // Initializing elements of matrix mult to 0.
-    for(i = 0; i < r1; ++i)
-        for(j = 0; j < c2; ++j)
+    for (i = 0; i < r1; ++i)
+        for (j = 0; j < c2; ++j)
         {
-            mult[i][j]=0;
+            mult[i][j] = 0;
         }
 
     // Multiplying matrix a and b and storing in array mult.
-    for(i = 0; i < r1; ++i)
-        for(j = 0; j < c2; ++j)
-            for(k = 0; k < c1; ++k)
+    for (i = 0; i < r1; ++i)
+        for (j = 0; j < c2; ++j)
+            for (k = 0; k < c1; ++k)
             {
                 mult[i][j] += a[i][k] * b[k][j];
             }
 
     // Displaying the multiplication of two matrix.
-    cout << endl << "Output Matrix: " << endl;
-    for(i = 0; i < r1; ++i)
-    for(j = 0; j < c2; ++j)
-    {
-        cout << " " << mult[i][j];
-        if(j == c2-1)
-            cout << endl;
-    }
+    cout << endl
+         << "Output Matrix: " << endl;
+    for (i = 0; i < r1; ++i)
+        for (j = 0; j < c2; ++j)
+        {
+            cout << " " << mult[i][j];
+            if (j == c2 - 1)
+                cout << endl;
+        }
 
     return;
 }
 
 void transpose()
 {
-  int a[10][10], transpose[10][10], row, column, i, j;
+    int a[10][10], transpose[10][10], row, column, i, j;
 
-   cout << "Enter rows and columns of matrix: ";
-   cin >> row >> column;
+    cout << "Enter rows and columns of matrix: ";
+    cin >> row >> column;
 
-   cout << "\nEnter elements of matrix: " << endl;
+    cout << "\nEnter elements of matrix: " << endl;
 
-   // Storing matrix elements
-   for (int i = 0; i < row; ++i) {
-      for (int j = 0; j < column; ++j) {
-         cout << "Enter element a" << i + 1 << j + 1 << ": ";
-         cin >> a[i][j];
-      }
-   }
+    // Storing matrix elements
+    for (int i = 0; i < row; ++i)
+    {
+        for (int j = 0; j < column; ++j)
+        {
+            cout << "Enter element a" << i + 1 << j + 1 << ": ";
+            cin >> a[i][j];
+        }
+    }
 
-   // Printing the a matrix
-   cout << "\nEntered Matrix: " << endl;
-   for (int i = 0; i < row; ++i) {
-      for (int j = 0; j < column; ++j) {
-         cout << " " << a[i][j];
-         if (j == column - 1)
-            cout << endl << endl;
-      }
-   }
+    // Printing the a matrix
+    cout << "\nEntered Matrix: " << endl;
+    for (int i = 0; i < row; ++i)
+    {
+        for (int j = 0; j < column; ++j)
+        {
+            cout << " " << a[i][j];
+            if (j == column - 1)
+                cout << endl
+                     << endl;
+        }
+    }
 
-   // Computing transpose of the matrix
-   for (int i = 0; i < row; ++i)
-      for (int j = 0; j < column; ++j) {
-         transpose[j][i] = a[i][j];
-      }
+    // Computing transpose of the matrix
+    for (int i = 0; i < row; ++i)
+        for (int j = 0; j < column; ++j)
+        {
+            transpose[j][i] = a[i][j];
+        }
 
-   // Printing the transpose
-   cout << "\nTranspose of Matrix: " << endl;
-   for (int i = 0; i < column; ++i)
-      for (int j = 0; j < row; ++j) {
-         cout << " " << transpose[i][j];
-         if (j == row - 1)
-            cout << endl << endl;
-      }
+    // Printing the transpose
+    cout << "\nTranspose of Matrix: " << endl;
+    for (int i = 0; i < column; ++i)
+        for (int j = 0; j < row; ++j)
+        {
+            cout << " " << transpose[i][j];
+            if (j == row - 1)
+                cout << endl
+                     << endl;
+        }
 
-   return;
+    return;
 }
 
 bool redo()
 {
-  string redo;
-  
-  cout << "Continue?" << endl;
-  cin >> redo;
-  
-  if (redo == "yes"
-      {
+    string redo;
+
+    cout << "Continue?" << endl;
+    cin >> redo;
+
+    if (redo == "yes")
+    {
         return true;
-      }
-      else if (redo == "no"
-               {
-               return false;
-               }
-                 
-  
+    }
+    return false;
 }
