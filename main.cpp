@@ -3,6 +3,10 @@
 
 using namespace std;
 
+// Completed: 6-13-23
+// Author: Maddawg9838
+
+// Function Prototypes
 bool redo();
 void addition();
 void multiplication();
@@ -12,6 +16,7 @@ int main()
 {
     int option;
 
+    // Menu
     do
     {
         cout << "1. Addition" << endl
@@ -35,6 +40,7 @@ int main()
     } while (redo() == true);
 }
 
+// Calculates the addition of as many matrices as needed using for loops
 void addition()
 {
     int number, row, col;
@@ -89,6 +95,7 @@ void addition()
     }
 }
 
+// Calculates the product between two matrixes using for loops
 void multiplication()
 {
     int row1, col1, row2, col2;
@@ -201,11 +208,12 @@ void multiplication()
     return;
 }
 
+// Finds the transpose of a single matrix using for loops
 void transpose()
 {
     int row, col;
 
-    cout << "Please enter the dimensions for matrices " << endl;
+    cout << "Please enter the dimensions for the matrix " << endl;
     cout << "Enter the number of rows: ";
     cin >> row;
     cout << "Enter the number of cols: ";
@@ -259,6 +267,7 @@ void transpose()
     return;
 }
 
+// Allows the user to repeat the program
 bool redo()
 {
     string redo;
